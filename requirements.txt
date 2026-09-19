@@ -1,0 +1,12 @@
+# Tested with Python 3.13: pandas 3.0, numpy 2.3, scipy 1.17, statsmodels 0.14, scikit-learn 1.9,
+# matplotlib 3.10, streamlit 1.51. Ranges are deliberately loose; see README for the exact tested set.
+pandas>=2.2
+numpy>=1.26
+scipy>=1.13
+statsmodels>=0.14
+scikit-learn>=1.4
+matplotlib>=3.8
+openpyxl>=3.1
+requests>=2.32
+streamlit>=1.40
+jupyter>=1.0

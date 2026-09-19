@@ -1,0 +1,4 @@
+model,log_loss
+Segment-mean baseline (no price),0.6627648570334761
+"Logit on ln(price), per segment",0.6573985402657517
+"Gradient boosting (price, discount, base)",0.6599026342540928

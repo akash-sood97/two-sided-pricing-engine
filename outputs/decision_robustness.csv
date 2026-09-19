@@ -1,0 +1,11 @@
+segment,r_star,r_p10,r_p90,direction_stability
+Delhi / appliance repair,1.05,1.05,1.05,1.0
+Delhi / cleaning,0.915,0.91,0.915,1.0
+Delhi / pest control,1.05,1.05,1.05,1.0
+Delhi / plumbing,1.05,1.05,1.05,1.0
+Delhi / salon at home,0.85,0.825,0.89,1.0
+Hyderabad / appliance repair,1.05,1.05,1.05,1.0
+Hyderabad / cleaning,1.05,1.05,1.05,1.0
+Hyderabad / pest control,0.84,0.8,0.895,0.9875
+Hyderabad / plumbing,1.05,1.05,1.05,1.0
+Hyderabad / salon at home,0.8,0.8,0.8,1.0
