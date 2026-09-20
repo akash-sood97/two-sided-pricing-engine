@@ -17,6 +17,10 @@
 
 **[Read the one-page decision memo →](docs/DECISION_MEMO.md)**
 
+![Pricing both sides earns Rs 5.85M a year against Rs 5.64M for a customer-only price, which promises Rs 6.08M it cannot serve. Contribution +7.1% versus +3.2%, worth Rs 0.21M a year, and Delhi cleaning peak-week fulfilment rises from 64% to 92%.](figures/00_decision.png)
+
+*The whole decision in one picture. The three figures below repeat it as text.*
+
 | | | |
 |---|---|---|
 | **+7.1%** | **₹0.21M / yr** | **64% → 92%** |

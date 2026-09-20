@@ -75,6 +75,7 @@ def main():
     )
     (OUT / "summary.json").write_text(json.dumps({k: float(v) for k, v in S.items()}, indent=2))
 
+    fig0_decision(sq, ss, ts, S)
     fig1_recovery(fit)
     fig2_partner(partners)
     fig3_frontier(segs, S)
@@ -88,6 +89,39 @@ def main():
 
 
 # --------------------------------------------------------------------------- figures
+def fig0_decision(sq, ss, ts, S):
+    """The one-picture version: what each pricing approach actually delivers."""
+    def draw(ax):
+        names = ["Today", "Customers\nonly", "Both\nsides"]
+        vals = [sq.net / 1e6, ss.net / 1e6, ts.net / 1e6]
+        ax.bar(names, vals, color=[C["neutral"], C["orange"], C["blue"]], width=0.58, zorder=3)
+        ax.bar(names[1], (ss.promised - ss.net) / 1e6, bottom=ss.net / 1e6, width=0.58,
+               facecolor="none", edgecolor=C["orange"], ls=(0, (3, 2)), lw=1.8, zorder=4)
+        ax.text(1, ss.promised / 1e6 + 0.22, f"promises ₹{ss.promised/1e6:.2f}M,\ncannot serve it",
+                ha="center", va="bottom", fontsize=11.5, color=C["orange"], linespacing=1.25)
+        for i, v in enumerate(vals):
+            ax.text(i, v - 0.62, f"₹{v:.2f}M", ha="center", fontsize=13,
+                    fontweight="bold", color="white", zorder=6)
+        ax.set_ylim(0, 8.3)
+        ax.set_ylabel("₹ million a year", fontsize=11.5)
+        ax.tick_params(axis="x", labelsize=12)
+        ax.tick_params(axis="y", labelsize=10.5)
+        ax.grid(axis="x", visible=False)
+
+    viz.decision_card(
+        FIG / "00_decision.png",
+        f"Price both sides and earn ₹{ts.net/1e6:.2f}M a year — pricing for customers "
+        f"alone wins bookings partners cannot serve.",
+        [(f"+{S['uplift_ts']*100:.1f}% vs +{S['uplift_ss']*100:.1f}%",
+          "contribution gain: both sides vs customers only"),
+         (f"₹{S['gain_two_vs_single']/1e6:.2f}M a year", "what pricing both sides is worth"),
+         (f"{S['cd_serv_single']*100:.0f}% → {S['cd_serv_two']*100:.0f}%",
+          "Delhi cleaning peak-week jobs filled")],
+        draw,
+        note="Synthetic marketplace, 10 city × service segments. Partner response is calibrated, not measured.",
+    )
+
+
 def fig1_recovery(fit):
     d = fit.sort_values("true_beta").reset_index(drop=True)
     fig, ax = plt_fig(9, 5.6)
