@@ -8,6 +8,8 @@
 - **Result.** **+7.1%** modelled annual contribution, ₹5.46M → ₹5.85M. Pricing for customers alone earns less than half of that: **+3.2%**.
 - **The trade-off.** Four segments need price *rises* to clear the pay floor. Plumbing needs about **+19%**, outside what this data can vouch for — so it gets a staged test, not a rollout.
 
+**[Try the live price explorer →](https://akash-sood97.github.io/two-sided-pricing-engine/explorer/)** — runs in your browser; first load takes about 20 seconds.
+
 *Lived context, not a project output: I run a category P&L in a home-services marketplace, where the pull between customer price and partner earnings is a live weekly decision.*
 
 > **Data and honesty**
@@ -133,6 +135,7 @@ Every number in the figures and the memo is computed by `analysis/run_analysis.p
 src/          elasticity.py (demand model) · economics.py (two-sided engine, optimiser) · viz.py · data generators
 analysis/     run_analysis.py
 app/          streamlit_app.py
+explorer/     index.html (in-browser version of the app, via stlite)
 data/         generate.py · processed/ (committed) · generation_report.md
 outputs/      CSVs behind every chart · summary.json
 figures/      the six charts above

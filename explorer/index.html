@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Two-sided price explorer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.2/build/stlite.css" />
+    <style>
+      body { margin: 0; font-family: system-ui, sans-serif; }
+      .note { padding: 8px 16px; font-size: 14px; background: #f3f4f6; color: #1f2937; }
+      .note a { color: inherit; }
+      @media (prefers-color-scheme: dark) { .note { background: #1f2937; color: #e5e7eb; } }
+    </style>
+  </head>
+  <body>
+    <div class="note">
+      <div id="loading">Loading Python in your browser — first load takes up to a minute.</div>
+      <div>Live, serverless demo of the <a href="https://github.com/akash-sood97/two-sided-pricing-engine">two-sided pricing engine</a>. Synthetic data; model outputs only.</div>
+    </div>
+    <div id="root"></div>
+    <script type="module">
+      import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.2/build/stlite.js";
+      mount(
+        {
+          requirements: ["pandas", "numpy", "scipy", "statsmodels", "scikit-learn"],
+          entrypoint: "app/streamlit_app.py",
+          streamlitConfig: { "client.toolbarMode": "viewer" },
+          files: {
+          "app/streamlit_app.py": { url: "../app/streamlit_app.py" },
+          "src/__init__.py": { url: "../src/__init__.py" },
+          "src/capacity.py": { url: "../src/capacity.py" },
+          "src/config.py": { url: "../src/config.py" },
+          "src/economics.py": { url: "../src/economics.py" },
+          "src/elasticity.py": { url: "../src/elasticity.py" },
+          "src/partners.py": { url: "../src/partners.py" },
+          "src/proxy.py": { url: "../src/proxy.py" },
+          "src/transactions.py": { url: "../src/transactions.py" },
+          "src/viz.py": { url: "../src/viz.py" },
+          "data/processed/capacity.csv": { url: "../data/processed/capacity.csv" },
+          "data/processed/partners.csv": { url: "../data/processed/partners.csv" },
+          "data/processed/segment_truth.csv": { url: "../data/processed/segment_truth.csv" },
+          "data/processed/transactions.csv": { url: "../data/processed/transactions.csv" },
+          },
+        },
+        document.getElementById("root"),
+      );
+      // Hide the loading line once the app has drawn its first metric.
+      const loading = document.getElementById("loading");
+      new MutationObserver((_, obs) => {
+        if (document.querySelector('[data-testid="stMetric"]')) { loading.hidden = true; obs.disconnect(); }
+      }).observe(document.getElementById("root"), { childList: true, subtree: true });
+    </script>
+  </body>
+</html>
